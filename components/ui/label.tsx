@@ -1,0 +1,26 @@
+"use client";
+
+import * as React from "react";
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils";
+
+const labelVariants = cva(
+    "text-sm font-semibold leading-relaxed mb-2 block peer-disabled:cursor-not-allowed peer-disabled:opacity-70 transition-colors duration-150 cursor-pointer select-none group-focus-within:text-primary dark:group-focus-within:text-zinc-50"
+);
+
+const Label = React.forwardRef<
+    React.ElementRef<typeof LabelPrimitive.Root>,
+    React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+    <LabelPrimitive.Root
+        ref={ref}
+        className={cn(labelVariants(), className)}
+        {...props}
+    />
+));
+Label.displayName = LabelPrimitive.Root.displayName;
+
+export { Label };
